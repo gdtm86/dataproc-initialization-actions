@@ -85,6 +85,12 @@ function main() {
   # Generate livy environment file.
   make_livy_env
 
+  #Update livy.conf in /usr/local/lib/livy/conf/ and uncomment livy.spark.master property and set it to yarn
+  cp /usr/local/lib/livy/conf/livy.conf.template /usr/local/lib/livy/conf/livy.conf
+  echo "                                              " >> /usr/local/lib/livy/conf/livy.conf
+  echo "############ Custom Configurations ###########" >> /usr/local/lib/livy/conf/livy.conf
+  echo "livy.spark.master = yarn" >> /usr/local/lib/livy/conf/livy.conf
+
   # Start livy service.
   create_systemd_unit
   systemctl enable "livy.service"
